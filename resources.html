@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAVE/ERPSense - Azure Resources</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-link:hover {
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">PAVE/ERPSense</h1>
+                <div class="space-x-6">
+                    <a href="index.html#overview" class="text-gray-600 nav-link">Overview</a>
+                    <a href="index.html#features" class="text-gray-600 nav-link">Features</a>
+                    <a href="index.html#demo" class="text-gray-600 nav-link">Demo</a>
+                    <a href="resources.html" class="text-gray-600 nav-link font-bold">Resources</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <!-- Azure Resources -->
+        <section id="resources" class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Azure Resources</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+                The following table lists the Azure resources used by PAVE/ERPSense, their types, locations, resource groups, descriptions, and specific purposes in the product.
+            </p>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-md rounded-lg">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Name</th>
+                            <th class="py-3 px-6 text-left">Type</th>
+                            <th class="py-3 px-6 text-left">Location</th>
+                            <th class="py-3 px-6 text-left">Resource Group</th>
+                            <th class="py-3 px-6 text-left">Description</th>
+                            <th class="py-3 px-6 text-left">Purpose in PAVE/ERPSense</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm">
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">ERPSense</td>
+                            <td class="py-3 px-6">microsoft.web/staticsites</td>
+                            <td class="py-3 px-6">eastus2</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">Hosts static HTML/CSS/JavaScript files from a GitHub repository, like a website's default page.</td>
+                            <td class="py-3 px-6">Serves PAVE/ERPSense documentation at https://purple-cliff-092ae700f.6.azurestaticapps.net, displaying System Overview, Key Features (Smartsheet, RAID logs, Blob Storage, Logic Apps), and Demo Instructions for consultants (April 17–19, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">azureblob</td>
+                            <td class="py-3 px-6">microsoft.web/connections</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">Defines a connection to Azure Blob Storage for Logic Apps, storing credentials like a server script.</td>
+                            <td class="py-3 px-6">Enables Logic Apps to access Blob Storage (p2pstorage123) to store RAID Log CSVs (raid_log.csv) and transcript attachments, acting as a bridge between Smartsheet and Azure storage (April 9–17, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">p2pstorage123</td>
+                            <td class="py-3 px-6">microsoft.storage/storageaccounts</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">Stores unstructured data (CSVs, PDFs, text) like a file server directory.</td>
+                            <td class="py-3 px-6">Holds Smartsheet data (RAID Log CSVs, transcript PDFs, Infor guides) and AI outputs (embeddings, extracted text) for RAG, serving as the file cabinet for work products (April 10–17, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">master</td>
+                            <td class="py-3 px-6">microsoft.sql/servers/databases</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">A SQL database storing structured data, like a website's backend database.</td>
+                            <td class="py-3 px-6">A default or legacy database, possibly holding test data or metadata (e.g., Client_Master) from early setup, not actively used by PAVE/ERPSense (March 5, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">PAVE-DB</td>
+                            <td class="py-3 px-6">microsoft.sql/servers/databases</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">A SQL database storing structured data, like a dynamic website's database.</td>
+                            <td class="py-3 px-6">The primary database storing tables like Stakeholder_Master, RAID_Log, AI_Generated_WorkProduct, and AI_Metadata, supporting the Flask app’s PAVE Dashboard and RAG work products (e.g., BRE-140E) (April 9, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">pave-sql-server</td>
+                            <td class="py-3 px-6">microsoft.sql/servers</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">Hosts SQL databases (master, PAVE-DB), like a database server.</td>
+                            <td class="py-3 px-6">Manages connections for PAVE-DB, enabling the Flask app and Logic Apps to query RAID and stakeholder data for dashboards and reports (April 9, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">smartsheet-search</td>
+                            <td class="py-3 px-6">microsoft.search/searchservices</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">An AI Search service indexing data for fast retrieval, like a website’s search engine.</td>
+                            <td class="py-3 px-6">Indexes Smartsheet data (RAID Log, transcripts, Infor guides) in Blob Storage and Chroma, enabling RAG to retrieve data for work products like stakeholder reports and blueprints (April 10, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">DefaultWorkspace-e800edc4-cfd8-4c8f-a6c0-1991a7eb3b6b-EUS</td>
+                            <td class="py-3 px-6">microsoft.operationalinsights/workspaces</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">DefaultResourceGroup-EUS</td>
+                            <td class="py-3 px-6">A Log Analytics Workspace collecting telemetry, like a server log file.</td>
+                            <td class="py-3 px-6">Monitors Azure resources (Logic Apps, SQL Server) for performance and errors, aiding troubleshooting (e.g., Logic App failures) (April 11, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">NetworkWatcher_eastus</td>
+                            <td class="py-3 px-6">microsoft.network/networkwatchers</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">NetworkWatcherRG</td>
+                            <td class="py-3 px-6">Monitors network performance, like a diagnostic tool for website traffic.</td>
+                            <td class="py-3 px-6">Ensures network connectivity for data transfers (e.g., Smartsheet to Blob Storage), a default resource not directly used by PAVE/ERPSense (April 9, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">pave-smartsheet-attachments</td>
+                            <td class="py-3 px-6">microsoft.logic/workflows</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">A Logic App automating workflows, like a server script processing uploads.</td>
+                            <td class="py-3 px-6">Ingests Smartsheet attachments (transcript PDFs, PowerPoints), stores them in Blob Storage, and processes with Document Intelligence for RAG, supporting work products like action item summaries (April 16–17, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">pave-smartsheet-sync</td>
+                            <td class="py-3 px-6">microsoft.logic/workflows</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">A Logic App automating data sync, like a script fetching API data.</td>
+                            <td class="py-3 px-6">Syncs Smartsheet RAID Log rows (Risk, Action, Issue) to Blob Storage as raid_log.csv, providing data for RAG reports and dashboards (April 9, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">MSVMI-DefaultWorkspace-e800edc4-cfd8-4c8f-a6c0-1991a7eb3b6b-EUS</td>
+                            <td class="py-3 px-6">microsoft.insights/datacollectionrules</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">DefaultResourceGroup-EUS</td>
+                            <td class="py-3 px-6">A Data Collection Rule for Azure Monitor, like a logging rule.</td>
+                            <td class="py-3 px-6">Collects telemetry for resources, supporting diagnostics for Logic Apps and SQL Server, a default rule not directly used by PAVE/ERPSense (April 11, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">p2p-language-service</td>
+                            <td class="py-3 px-6">microsoft.cognitiveservices/accounts</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">A Cognitive Services account for text analytics, like a text-processing API.</td>
+                            <td class="py-3 px-6">Analyzes Smartsheet data (e.g., RAID comments, transcripts) for sentiment or key phrases, enhancing RAG outputs like risk prioritization (April 17, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">smartsheet-doc-intelligence-s0</td>
+                            <td class="py-3 px-6">microsoft.cognitiveservices/accounts</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">A Document Intelligence account extracting text from documents, like an OCR tool.</td>
+                            <td class="py-3 px-6">Extracts text from Smartsheet attachments (transcript PDFs) using prebuilt-read, storing in Blob Storage for Chroma embeddings and RAG work products (April 10–11, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">smartsheet-openai</td>
+                            <td class="py-3 px-6">microsoft.cognitiveservices/accounts</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">An OpenAI Service account for language models, like an AI content generator.</td>
+                            <td class="py-3 px-6">Generates embeddings for Smartsheet data in Chroma and produces RAG outputs (e.g., blueprints, summaries), the brain for work products like BRE-140E (April 9–10, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">smartsheet-doc-intelligence</td>
+                            <td class="py-3 px-6">microsoft.cognitiveservices/accounts</td>
+                            <td class="py-3 px-6">eastus</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">A Document Intelligence account, similar to smartsheet-doc-intelligence-s0.</td>
+                            <td class="py-3 px-6">Processes additional Smartsheet attachments or serves as a test instance, supporting text extraction for RAG work products like meeting summaries (April 11, 2025).</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">rober-m9bbhzpg-swedencentral</td>
+                            <td class="py-3 px-6">microsoft.cognitiveservices/accounts</td>
+                            <td class="py-3 px-6">swedencentral</td>
+                            <td class="py-3 px-6">ERPSensePrototype</td>
+                            <td class="py-3 px-6">A Cognitive Services account, possibly for OpenAI or Document Intelligence.</td>
+                            <td class="py-3 px-6">A test or secondary AI instance, possibly for EU compliance, processing Smartsheet data or Infor guides for RAG, not actively used (April 10, 2025).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2025 PAVE/ERPSense. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
